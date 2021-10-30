@@ -5,3 +5,7 @@ it shows pretty much all you need to compile it for android with ```Convolution2
 selfiesegmentation_mlkit-256x256-2021_01_19-v1215.f16.tflite
 
 This Build contains tflite with custom ops from Mediapipe.
+
+read more about Selfie Segmentation see: https://developers.google.com/ml-kit/vision/selfie-segmentation
+read more about the used model: https://developers.google.com/ml-kit/images/vision/selfie-segmentation/selfie-model-card.pdf
+
