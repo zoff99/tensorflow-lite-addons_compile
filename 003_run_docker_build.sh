@@ -16,7 +16,7 @@ mkdir -p $_HOME_/workspace
 
 # Encountered unresolved custom op: Convolution2DTransposeBias
 
-release="77a7fe960e709d46a07d02a1613b1bdb86d719b1" # --> "v2.6.0"
+release="3aa40c3ce9d16eae296f086bc4ac4d62deb2affc" # --> "v2.6.1"
 
 echo '#! /bin/bash
 
@@ -29,16 +29,8 @@ git checkout "'"$release"'"
 
 printf "\n\n\n\n\n\ny\n"|./configure
 
-# bazel build -c opt --fat_apk_cpu=x86,x86_64,arm64-v8a,armeabi-v7a --host_crosstool_top=@bazel_tools//tools/cpp:toolchain //tensorflow/lite/java:tensorflow-lite
-# bazel build -c opt --fat_apk_cpu=x86,x86_64,arm64-v8a,armeabi-v7a --host_crosstool_top=@bazel_tools//tools/cpp:toolchain //tensorflow/lite/java:tensorflow-lite-gpu
-
-# wget "https://github.com/zoff99/backscrub/raw/main/models/selfiesegmentation_mlkit-256x256-2021_01_19-v1215.f16.tflite" -O selfiesegmentation_mlkit-256x256-2021_01_19-v1215.f16.tflite
-# wget "https://raw.githubusercontent.com/google/mediapipe/731d2b95363d58f12acb29a6f8435ec33fe548d9/mediapipe/util/tflite/operations/transpose_conv_bias.cc"
-# wget "https://raw.githubusercontent.com/google/mediapipe/731d2b95363d58f12acb29a6f8435ec33fe548d9/mediapipe/util/tflite/operations/transpose_conv_bias.h"
-
 cp -av /script/src/* ./tensorflow/lite/kernels/
 git status
-
 
 bash -x tensorflow/lite/tools/build_aar.sh \
 --target_archs=x86,x86_64,arm64-v8a,armeabi-v7a
@@ -46,10 +38,6 @@ bash -x tensorflow/lite/tools/build_aar.sh \
 bazel build -c opt --cxxopt=--std=c++14 --config=monolithic \
 --fat_apk_cpu=x86,x86_64,arm64-v8a,armeabi-v7a \
 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain //tensorflow/lite/java:tensorflow-lite-gpu
-
-# --tflite_custom_ops_srcs=transpose_conv_bias.cc,transpose_conv_bias.h \
-# --input_models=selfiesegmentation_mlkit-256x256-2021_01_19-v1215.f16.tflite \
-# --tflite_custom_ops_deps=transpose_conv_bias.h
 
 ls -hal bazel-bin/tensorflow/lite/java/*.aar
 cp -av bazel-bin/tensorflow/lite/java/*.aar /artefacts/
@@ -70,6 +58,6 @@ docker run -ti --rm \
   -v $_HOME_/workspace:/workspace \
   -e DISPLAY=$DISPLAY \
   tflite-builder \
-  /bin/bash # /script/do_it___external.sh
+  /bin/bash /script/do_it___external.sh
 
 
