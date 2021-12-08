@@ -16,7 +16,7 @@ mkdir -p $_HOME_/workspace
 
 # Encountered unresolved custom op: Convolution2DTransposeBias
 
-release="77a7fe960e709d46a07d02a1613b1bdb86d719b1" # --> "v2.6.0"
+release="c2363d6d025981c661f8cbecf4c73ca7fbf38caf" # --> "v2.6.2"
 
 echo '#! /bin/bash
 
